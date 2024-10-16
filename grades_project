@@ -1,0 +1,139 @@
+class Grades:
+    def __init__(self, homework_P, exams_P, labs_P, participation_P):     # Percents given
+        self.__homework_P = homework_P
+        self.__exams_P = exams_P
+        self.__labs_P = labs_P
+        self.__participation_P = participation_P
+
+
+    
+    def addHomework(self, grade):
+        self.__homework = grade
+
+    def display_homework(self):
+        total = sum(self.__homework)
+        count = len(self.__homework)
+        self.__homework_grade = total / count
+
+        print(f"1. Homework {' '*5} Points")
+        for num, grade in enumerate(self.__homework, start=1):
+            print(f"{' '*3}Homework {num} {grade:>8}")
+
+        print(f"{' '*3}Total = {total}, Num = {count}, Average = {self.__homework_grade:.2f}")
+
+
+    
+    def addExams(self, exams):
+        self.__exams = exams
+
+    def display_exams(self):
+        total = sum(self.__exams)
+        count = len(self.__exams)
+        self.__exam_grade = total / count
+
+        print(f"2. Exams {' '*8} Points")
+        for num, exams in enumerate(self.__exams, start=1):
+            print(f"{' '*3}Exam {num} {exams:>12}")
+
+        print(f"{' '*3}Total = {total}, Num = {count}, Average = {self.__exam_grade:.2f}")
+
+
+    
+    def setLabs(self, labs):
+        self.__labs = labs
+        decrement = 16.666
+        self.__lab_grade = 100
+        
+        if labs < 6:
+            missing =  6 - labs
+            subtract = missing * decrement
+            self.__lab_grade -= subtract
+        else:
+            self.__lab_grade = 100
+            
+    def display_labs(self):
+        print(f"3. Lab Sessions = {self.__labs}, Points = {self.__lab_grade:.2f}")
+
+
+    
+    def setParticipation(self, participation):
+        self.__participation_grade = participation
+        
+    def display_participation(self):
+        print(f"4. Class Participation Points = {self.__participation_grade}")
+
+
+
+    def report(self):     
+        print("-"*50)
+        print("GRADE REPORT")
+        print("-"*50)
+        
+        self.display_homework()
+        print("-"*50)
+        self.display_exams()
+        print("-"*50)
+        self.display_labs()
+        print("-"*50)
+        self.display_participation()
+        print("-"*50)
+
+        total_homework = self.__homework_grade * self.__homework_P    # Avg homework grade * homework value percent
+        total_exams = self.__exam_grade * self.__exams_P            # Avg exam grade * exam value percent
+        total_labs = self.__lab_grade * self.__labs_P             # Avg lab grade * lab value percent
+        total_participation = self.__participation_grade * self.__participation_P    # Avg participation grade * participation value percent
+        total_grade = total_homework + total_exams + total_labs + total_participation   # Adds every grade together
+        
+        print(" ")
+        print("SUMMARY")
+        print("-"*50)
+        print(f"Homework{' '*10}{self.__homework_grade:.2f}  x {' '*2}{self.__homework_P*100:.0f}% =  {total_homework:.2f}")
+        print(f"Exams{' '*13}{self.__exam_grade:.2f}   x {' '*2}{self.__exams_P*100:.0f}% =  {total_exams:.2f}")
+        print(f"Labs{' '*14}{self.__lab_grade:.2f}   x {' '*2}{self.__labs_P*100:.0f}%  =  {total_labs:.2f}")
+        print(f"Participation{' '*5}{self.__participation_grade:.2f}  x {' '*2}{self.__participation_P*100:.0f}%  =  {total_participation:.2f}")
+        print(f"Final Grade Points{' '*19}{total_grade:.2f}")
+
+
+        letter = ""                  # prints out letter grade based on total_grade
+        if total_grade >= 100:
+            letter = "A+"
+        elif 95 <= total_grade < 100:
+            letter = "A"
+        elif 90 <= total_grade < 95:
+            letter = "A-"
+
+        
+        elif 85 <= total_grade < 90:
+            letter = "B+"
+        elif 83 <= total_grade < 85:
+            letter = "B"
+        elif 80 <= total_grade < 83:
+            letter = "B-"
+
+        
+        elif 75 <= total_grade < 80:
+            letter = "C+"
+        elif 73 <= total_grade < 75:
+            letter = "C"
+        elif 70 <= total_grade < 73:
+            letter = "C-"
+
+        
+        elif total_grade < 70:
+            letter = "D"
+        elif total_grade <= 60:
+            letter = "F"
+
+        print("-"*50)
+        print(f"Final Grade Letter{' '*22}{letter}")
+        print("-"*50)
+
+
+
+
+grade = Grades(0.4, 0.5, 0.05, 0.05) # Percentages
+grade.addHomework([100, 110, 90, 100, 100]) # List of homework scores
+grade.addExams([70, 100, 80, 105]) # List of exam scores
+grade.setLabs(3) # Number of lab sessions
+grade.setParticipation(100) # Participation grade
+grade.report()
