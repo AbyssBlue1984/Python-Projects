@@ -5,7 +5,6 @@ class Grades:
         self.__labs_P = labs_P
         self.__participation_P = participation_P
 
-
     
     def addHomework(self, grade):
         self.__homework = grade
@@ -21,7 +20,6 @@ class Grades:
 
         print(f"{' '*3}Total = {total}, Num = {count}, Average = {self.__homework_grade:.2f}")
 
-
     
     def addExams(self, exams):
         self.__exams = exams
@@ -36,7 +34,6 @@ class Grades:
             print(f"{' '*3}Exam {num} {exams:>12}")
 
         print(f"{' '*3}Total = {total}, Num = {count}, Average = {self.__exam_grade:.2f}")
-
 
     
     def setLabs(self, labs):
@@ -54,14 +51,12 @@ class Grades:
     def display_labs(self):
         print(f"3. Lab Sessions = {self.__labs}, Points = {self.__lab_grade:.2f}")
 
-
     
     def setParticipation(self, participation):
         self.__participation_grade = participation
         
     def display_participation(self):
         print(f"4. Class Participation Points = {self.__participation_grade}")
-
 
 
     def report(self):     
@@ -102,7 +97,6 @@ class Grades:
         elif 90 <= total_grade < 95:
             letter = "A-"
 
-        
         elif 85 <= total_grade < 90:
             letter = "B+"
         elif 83 <= total_grade < 85:
@@ -110,7 +104,6 @@ class Grades:
         elif 80 <= total_grade < 83:
             letter = "B-"
 
-        
         elif 75 <= total_grade < 80:
             letter = "C+"
         elif 73 <= total_grade < 75:
@@ -118,7 +111,6 @@ class Grades:
         elif 70 <= total_grade < 73:
             letter = "C-"
 
-        
         elif total_grade < 70:
             letter = "D"
         elif total_grade <= 60:
@@ -127,8 +119,6 @@ class Grades:
         print("-"*50)
         print(f"Final Grade Letter{' '*22}{letter}")
         print("-"*50)
-
-
 
 
 grade = Grades(0.4, 0.5, 0.05, 0.05) # Percentages
