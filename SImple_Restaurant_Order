@@ -1,0 +1,58 @@
+class Table:
+    def __init__(self, num):
+        self.num = num
+        self.order = {}
+        self.tip_amount = 0  # Renamed to avoid conflict with method variable
+
+    def addOrder(self, order):
+        for food, price in order.items():
+            self.order[food] = price
+
+    def tip(self, option):
+        #if option == 1:
+            #self.tip_amount = 5
+        #elif option == 2:
+            #self.tip_amount = 10
+        #elif option == 3:
+            #self.tip_amount = 20
+        self.tip_amount = {1: 5, 2: 10, 3: 20}.get(option, 0)     # use dictionary instead to simplify
+
+    def bill(self):
+        total_bill = 0
+        tax_value = 0.06
+        tax = 0
+        
+        print(f"TABLE {self.num} BILL:")
+        print("-"*35)
+        
+        for food, price in self.order.items():
+            print(f"{food:<22} - ${' '*3}{price}")
+            tax += price * tax_value
+            total_bill += price
+        
+        final_bill = tax + total_bill + self.tip_amount
+        final_bill = round(final_bill, 2)
+
+
+        print("-" * 35)
+        print(f"{' '*10}{'SUB TOTAL':<12} - $ {total_bill:>5}")
+        print(f"{' '*10}{'TAX 1':<12} - $ {tax:>5}")
+        print(f"{' '*10}{'TIP':<12} - $ {self.tip_amount:>5}")
+        print(f"{' '*10}{'TOTAL':<12} - $ {final_bill:>5}")
+        print()
+
+
+table1 = Table(1)
+table2 = Table(2)
+
+order1 = {'Steak and eggs': 20, 'Coffee': 3}
+order2 = {'House Omelette': 7, 'Juice': 3}
+
+table1.addOrder(order1)
+table2.addOrder(order2)
+
+table1.tip(2)  # $10 tip
+table2.tip(3)  # $20 tip
+
+table1.bill()
+table2.bill()
